@@ -21,7 +21,7 @@ Chạy `node build.mjs` để tạo thư mục `dist/`. Không cần cài thư v
 
 Vercel đọc cấu hình `vercel.json` và xuất bản `dist/`. Bản build chỉ sao chép HTML, CSS, JavaScript và assets. Các tệp `.env*`, `.vercel/` và thông tin đăng nhập không được đưa vào Git hoặc bản build.
 
-Website: https://canh-giay-lamprrro1234-2289.vercel.app
+Website: https://canh-giay.vercel.app
 
 ## Kiểm tra
 
