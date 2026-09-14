@@ -11,6 +11,10 @@ Website one-page quảng bá thương hiệu sách thiếu nhi **Cánh Giấy**.
 - Thiết kế responsive cho desktop, tablet và mobile.
 - Hiệu ứng chuyển động, marquee, floating cards và parallax nhẹ.
 
+## Production
+
+Vercel: https://canh-giay-lamprrro1234-2289.vercel.app
+
 ## Triển khai
 
 Dự án là website tĩnh, không cần build. Có thể deploy trực tiếp trên Vercel với root directory là thư mục gốc repository.
