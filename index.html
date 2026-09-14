@@ -1,214 +1,65 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#fff8e9" />
-  <meta name="description" content="Cánh Giấy — không gian sách dành cho thiếu niên nhi đồng, nơi mỗi trang sách chắp cánh cho trí tưởng tượng." />
-  <title>Cánh Giấy | Mở trang sách, chắp cánh ước mơ</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="./styles.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071c2d">
+  <meta name="description" content="Cánh Giấy — sách dành cho thiếu niên nhi đồng. Mở trang sách, chắp cánh ước mơ qua những thế giới cổ tích, khoa học và tình bạn.">
+  <meta property="og:title" content="Cánh Giấy — Mở trang sách, chắp cánh ước mơ">
+  <meta property="og:description" content="Một trang sách. Vạn điều kỳ diệu. Khám phá thế giới Cánh Giấy.">
+  <title>Cánh Giấy — Mở trang sách, chắp cánh ước mơ</title>
+  <link rel="icon" href="./assets/favicon.png" type="image/png">
+  <link rel="preload" href="./assets/storybook-hero.webp" as="image" fetchpriority="high">
+  <link rel="stylesheet" href="./assets/fonts.css">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./script.js" defer></script>
 </head>
 <body>
-  <div class="sky-decor" aria-hidden="true">
-    <span class="cloud cloud-a"></span>
-    <span class="cloud cloud-b"></span>
-    <span class="star star-a">★</span>
-    <span class="star star-b">✦</span>
-    <span class="star star-c">★</span>
-  </div>
-
-  <header class="site-header" id="top">
-    <a class="brand" href="#top" aria-label="Cánh Giấy - Trang chủ">
-      <img src="./assets/logo.png" alt="Logo Cánh Giấy - Sách dành cho thiếu niên nhi đồng" />
-    </a>
-    <nav class="main-nav" aria-label="Điều hướng chính">
-      <a href="#story">Câu chuyện</a>
-      <a href="#worlds">Thế giới sách</a>
-      <a href="#film">Video</a>
-      <a href="#values">Giá trị</a>
-    </nav>
-    <a class="mini-cta" href="#discover">Khám phá ngay <span>↗</span></a>
+  <a class="skip-link" href="#main">Chuyển đến nội dung</a>
+  <header class="header">
+    <a class="brand" href="#home" aria-label="Cánh Giấy — Trang chủ"><img src="./assets/logo.png" alt="Cánh Giấy — Sách dành cho thiếu niên nhi đồng" width="1711" height="913"></a>
+    <nav class="nav" id="navigation" aria-label="Điều hướng chính"><a href="#worlds">Thế giới sách</a><a href="#story">Câu chuyện Cánh Giấy</a><a href="#film">Phim giới thiệu</a></nav>
+    <a class="header-cta" href="#worlds">Mở trang đầu tiên <span aria-hidden="true">↗</span></a>
+    <button class="menu-toggle" aria-label="Mở menu" aria-expanded="false" aria-controls="navigation"><span></span><span></span></button>
   </header>
-
-  <main>
-    <section class="hero" id="story">
-      <div class="hero-copy reveal">
-        <p class="eyebrow"><span>✦</span> THƯƠNG HIỆU SÁCH DÀNH CHO TRẺ</p>
-        <h1>Mở trang sách.<br /><em>Chắp cánh ước mơ.</em></h1>
-        <p class="hero-lead">Cánh Giấy tạo nên một thế giới đọc sách rực rỡ, an toàn và giàu cảm hứng — nơi mỗi câu chuyện giúp trẻ khám phá thêm một phiên bản mới của chính mình.</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#film">▶ Xem phim 30 giây</a>
-          <a class="btn btn-secondary" href="#worlds">Khám phá thế giới sách</a>
-        </div>
-        <div class="trust-row" aria-label="Điểm nổi bật">
-          <span><b>01</b> Nội dung phù hợp lứa tuổi</span>
-          <span><b>02</b> Học mà chơi</span>
-          <span><b>03</b> Kết nối gia đình</span>
-        </div>
+  <main id="main">
+    <section class="hero" id="home" aria-labelledby="hero-title">
+      <div class="hero-stars" aria-hidden="true"></div>
+      <div class="hero-content">
+        <p class="eyebrow light"><span class="tiny-star" aria-hidden="true">✦</span> DÀNH CHO NHỮNG TÂM HỒN HAY MƠ</p>
+        <h1 id="hero-title">Mở trang sách.<br>Chắp cánh<br><em>ước mơ.</em></h1>
+        <p class="hero-description">Có những chuyến phiêu lưu bắt đầu<br class="desktop-br"> từ một trang giấy. Cùng con mở ra cả thế giới.</p>
+        <div class="hero-actions"><a href="#worlds" class="button gold">Khám phá Cánh Giấy <span aria-hidden="true">↗</span></a><button class="watch-link" data-play><span class="play-circle" aria-hidden="true">▶</span><span>Xem thước phim<small>30 giây diệu kỳ</small></span></button></div>
+        <div class="hero-note"><span aria-hidden="true">✧</span> Sách dành cho thiếu niên nhi đồng</div>
       </div>
-
-      <div class="hero-art reveal" data-delay="120">
-        <div class="orbit orbit-one"></div>
-        <div class="orbit orbit-two"></div>
-        <div class="hero-card">
-          <img src="./assets/scene-fairytale.jpg" alt="Hai bạn nhỏ khám phá lâu đài cổ tích bước ra từ trang sách" />
-          <div class="hero-card-caption">
-            <span>THẾ GIỚI CỔ TÍCH</span>
-            <strong>Mỗi trang mở ra một chân trời</strong>
-          </div>
-        </div>
-        <div class="floating-note note-one">✨ Khơi trí tưởng tượng</div>
-        <div class="floating-note note-two">📚 Nuôi dưỡng thói quen đọc</div>
-        <svg class="paper-plane plane-one" viewBox="0 0 92 64" aria-hidden="true">
-          <path d="M5 28 86 4 55 59 40 39 23 50 26 34Z" fill="#ffca28" stroke="#0b5a80" stroke-width="4" stroke-linejoin="round"/>
-          <path d="M26 34 86 4 40 39" fill="#ff8a1f" stroke="#0b5a80" stroke-width="4" stroke-linejoin="round"/>
-        </svg>
-      </div>
+      <div class="hero-visual"><img class="hero-image" src="./assets/storybook-hero.webp" alt="Lâu đài và khu rừng kỳ ảo hiện lên từ cuốn sách mở, máy bay giấy vàng bay giữa những vì sao" width="1536" height="1024" fetchpriority="high"><div class="visual-caption"><span>01 / CHUYẾN BAY ĐẦU TIÊN</span><p>Một trang sách.<br><em>Vạn điều kỳ diệu.</em></p></div></div>
+      <div class="hero-bottom"><a href="#worlds"><span class="scroll-line" aria-hidden="true"></span> CUỘN ĐỂ KHÁM PHÁ</a><span>TRÍ TƯỞNG TƯỢNG KHÔNG CÓ GIỚI HẠN <i aria-hidden="true">✦</i></span></div>
     </section>
-
-    <section class="marquee" aria-label="Thông điệp thương hiệu">
-      <div class="marquee-track">
-        <span>ĐỌC ĐỂ MƠ XA ✦ KHÁM PHÁ ĐỂ LỚN KHÔN ✦ CÁNH GIẤY — SÁCH DÀNH CHO THIẾU NIÊN NHI ĐỒNG ✦ </span>
-        <span aria-hidden="true">ĐỌC ĐỂ MƠ XA ✦ KHÁM PHÁ ĐỂ LỚN KHÔN ✦ CÁNH GIẤY — SÁCH DÀNH CHO THIẾU NIÊN NHI ĐỒNG ✦ </span>
-      </div>
-    </section>
-
-    <section class="worlds section-pad" id="worlds">
-      <div class="section-heading reveal">
-        <p class="eyebrow"><span>✦</span> MỖI CUỐN SÁCH, MỘT CUỘC PHIÊU LƯU</p>
-        <h2>Chọn thế giới em muốn bay tới</h2>
-        <p>Từ lâu đài cổ tích đến dải ngân hà, từ góc đọc ấm áp đến những giờ vui cùng bạn bè — Cánh Giấy biến việc đọc thành một hành trình đáng mong chờ.</p>
-      </div>
-
+    <div class="word-ribbon" aria-hidden="true"><div><span>Đọc để mơ xa</span><b>✦</b><span>Khám phá để lớn khôn</span><b>✦</b><span>Mỗi trang sách, một đôi cánh</span><b>✦</b><span>Đọc để mơ xa</span><b>✦</b><span>Khám phá để lớn khôn</span><b>✦</b><span>Mỗi trang sách, một đôi cánh</span><b>✦</b></div></div>
+    <section class="worlds section" id="worlds" aria-labelledby="worlds-title">
+      <div class="section-top reveal"><div><p class="eyebrow">01 — MỞ CỬA TRÍ TƯỞNG TƯỢNG</p><h2 id="worlds-title">Hôm nay, em muốn<br><em>bay đến đâu?</em></h2></div><p class="section-intro">Theo chiếc máy bay giấy, bước vào những câu chuyện đầy màu sắc. Chạm vào một thế giới để bắt đầu hành trình.</p></div>
       <div class="world-grid">
-        <article class="world-card card-yellow reveal">
-          <img src="./assets/scene-fairytale.jpg" alt="Thế giới cổ tích nhiệm màu" />
-          <div class="world-card-body">
-            <span class="tag">Cổ tích & phiêu lưu</span>
-            <h3>Chạm vào điều kỳ diệu</h3>
-            <p>Những câu chuyện giàu cảm xúc giúp trẻ phát triển trí tưởng tượng và lòng nhân ái.</p>
-          </div>
-        </article>
-
-        <article class="world-card card-blue reveal" data-delay="100">
-          <img src="./assets/scene-space.jpg" alt="Hai bạn nhỏ khám phá khoa học và không gian" />
-          <div class="world-card-body">
-            <span class="tag">Khoa học & khám phá</span>
-            <h3>Bay giữa những vì sao</h3>
-            <p>Kiến thức gần gũi, hình ảnh sinh động, khơi dậy hàng nghìn câu hỏi “vì sao?”.</p>
-          </div>
-        </article>
-
-        <article class="world-card card-green reveal" data-delay="200">
-          <img src="./assets/scene-friends.jpg" alt="Nhóm bạn nhỏ cùng đọc sách và vui cười" />
-          <div class="world-card-body">
-            <span class="tag">Kỹ năng & tình bạn</span>
-            <h3>Lớn lên cùng nhau</h3>
-            <p>Mỗi trang sách là một cơ hội học cách sẻ chia, tự tin và khám phá thế giới quanh mình.</p>
-          </div>
-        </article>
+        <button class="world-card reveal" data-world="fairytale" aria-haspopup="dialog"><div class="world-picture"><img src="./assets/fairytale.webp" alt="Lâu đài cổ tích bước ra từ trang sách" width="1280" height="625" loading="lazy"><span class="card-number">01</span><span class="card-open" aria-hidden="true">↗</span></div><span class="world-label">TRÍ TƯỞNG TƯỢNG</span><h3>Xứ sở cổ tích</h3><p>Nơi điều không thể trở thành có thể.</p></button>
+        <button class="world-card reveal" data-world="space" aria-haspopup="dialog"><div class="world-picture"><img src="./assets/space.webp" alt="Hai bạn nhỏ làm phi hành gia khám phá Trái Đất" width="1280" height="625" loading="lazy"><span class="card-number">02</span><span class="card-open" aria-hidden="true">↗</span></div><span class="world-label">KHOA HỌC & KHÁM PHÁ</span><h3>Chạm những vì sao</h3><p>Mang theo một nghìn câu hỏi “vì sao?”.</p></button>
+        <button class="world-card reveal" data-world="forest" aria-haspopup="dialog"><div class="world-picture"><img src="./assets/forest.webp" alt="Hai bạn nhỏ cùng người bạn xanh khám phá khu rừng" width="1280" height="625" loading="lazy"><span class="card-number">03</span><span class="card-open" aria-hidden="true">↗</span></div><span class="world-label">THIÊN NHIÊN & PHIÊU LƯU</span><h3>Khu rừng bí mật</h3><p>Mỗi bước chân, một phát hiện bất ngờ.</p></button>
+        <button class="world-card reveal" data-world="friends" aria-haspopup="dialog"><div class="world-picture"><img src="./assets/friends.webp" alt="Nhóm bạn nhỏ vui vẻ đọc sách cùng nhau" width="1280" height="625" loading="lazy"><span class="card-number">04</span><span class="card-open" aria-hidden="true">↗</span></div><span class="world-label">TÌNH BẠN & KỸ NĂNG</span><h3>Cùng nhau lớn lên</h3><p>Những bài học nhỏ, những yêu thương lớn.</p></button>
       </div>
+      <p class="worlds-footnote"><span aria-hidden="true">✦</span> Bốn thế giới. Một tình yêu dành cho những trang sách.</p>
     </section>
-
-    <section class="motion-story section-pad" id="discover">
-      <div class="motion-copy reveal">
-        <p class="eyebrow"><span>✦</span> ẢNH ĐỘNG TỪ PHIM CÁNH GIẤY</p>
-        <h2>Một trang sách,<br />bao điều kỳ diệu.</h2>
-        <p>Chỉ cần lật trang đầu tiên, một chiếc máy bay giấy có thể đưa trí tưởng tượng đi xa hơn mọi bản đồ.</p>
-        <div class="feature-pills">
-          <span>🎨 Hình ảnh giàu màu sắc</span>
-          <span>🧠 Khơi gợi tư duy</span>
-          <span>💛 Nội dung tích cực</span>
-        </div>
-      </div>
-      <figure class="motion-frame reveal" data-delay="120">
-        <img src="./assets/dream-loop.webp" alt="Ảnh động máy bay giấy bay từ cuốn sách mở" loading="lazy" />
-        <figcaption>Khoảnh khắc được trích từ video giới thiệu Cánh Giấy.</figcaption>
-      </figure>
+    <section class="story section" id="story" aria-labelledby="story-title">
+      <div class="story-image reveal"><div class="photo-corner" aria-hidden="true"></div><img id="dream-motion" src="./assets/paper-dream.webp" alt="Máy bay giấy vàng bay quanh cuốn sách đang mở giữa những tia sáng" width="640" height="480" loading="lazy"><span class="image-label">TỪ TRANG GIẤY ĐẾN NHỮNG CHÂN TRỜI</span></div>
+      <div class="story-copy reveal"><p class="eyebrow">02 — CÂU CHUYỆN CÁNH GIẤY</p><h2 id="story-title">Nhỏ như trang giấy.<br><em>Rộng như ước mơ.</em></h2><p>Một cuốn sách mở ra. Một chiếc máy bay giấy cất cánh. Và một thế giới mới bắt đầu.</p><p>Cánh Giấy được xây dựng từ niềm tin giản dị: khi trẻ tìm thấy niềm vui trong từng trang sách, trí tưởng tượng sẽ tự tìm được đôi cánh của mình.</p><div class="story-values"><span><b>01</b> Nuôi dưỡng sự tò mò</span><span><b>02</b> Đánh thức trí tưởng tượng</span><span><b>03</b> Kết nối bằng yêu thương</span></div></div>
     </section>
-
-    <section class="film section-pad" id="film">
-      <div class="film-heading reveal">
-        <div>
-          <p class="eyebrow light"><span>✦</span> VIDEO GIỚI THIỆU THƯƠNG HIỆU</p>
-          <h2>30 giây để bước vào<br />thế giới Cánh Giấy</h2>
-        </div>
-        <p>Video có âm thanh, lời thuyết minh và phụ đề trực tiếp trong hình ảnh. Nhấn phát để thưởng thức trọn vẹn hành trình.</p>
-      </div>
-
-      <div class="video-shell reveal" data-delay="100">
-        <video controls playsinline preload="metadata" poster="./assets/poster.jpg" aria-label="Video quảng bá thương hiệu Cánh Giấy dài 30 giây">
-          <source src="./assets/canh-giay-30s.mp4" type="video/mp4" />
-          Trình duyệt của bạn chưa hỗ trợ phát video HTML5.
-        </video>
-        <div class="video-badge"><span class="pulse"></span> 00:30 • ÂM THANH + PHỤ ĐỀ</div>
-      </div>
+    <section class="film section" id="film" aria-labelledby="film-title">
+      <div class="film-top reveal"><p class="eyebrow light">03 — THƯỚC PHIM CÁNH GIẤY</p><span class="film-runtime">00:30 <span aria-hidden="true">/</span> MỘT CHUYẾN BAY</span></div>
+      <div class="film-heading reveal"><h2 id="film-title">Điều kỳ diệu<br><em>đang chờ em.</em></h2><p>Từ trang sách đến lâu đài, từ khu rừng đến dải ngân hà. Hãy để chiếc máy bay giấy dẫn đường.</p></div>
+      <div class="cinema reveal"><video id="brand-film" controls playsinline preload="metadata" poster="./assets/film-poster.webp" aria-label="Phim giới thiệu Cánh Giấy 30 giây, có âm thanh và phụ đề tiếng Việt trong hình"><source src="./assets/canh-giay-30s.mp4" type="video/mp4">Trình duyệt không hỗ trợ video. <a href="./assets/canh-giay-30s.mp4">Mở phim Cánh Giấy</a>.</video></div>
+      <div class="film-footer"><span>ÂM THANH · LỒNG TIẾNG · PHỤ ĐỀ TIẾNG VIỆT</span><button data-play class="film-replay">Xem từ đầu <span aria-hidden="true">↻</span></button></div>
     </section>
-
-    <section class="values section-pad" id="values">
-      <div class="section-heading compact reveal">
-        <p class="eyebrow"><span>✦</span> CÁNH GIẤY MANG ĐẾN ĐIỀU GÌ?</p>
-        <h2>Đọc vui hơn. Học tự nhiên hơn.<br />Gần nhau hơn.</h2>
-      </div>
-      <div class="value-grid">
-        <article class="value-card reveal">
-          <span class="value-num">01</span>
-          <div class="value-icon">📖</div>
-          <h3>Đọc theo sở thích</h3>
-          <p>Nhiều chủ đề để trẻ tự chọn điều mình yêu thích và hình thành thói quen đọc chủ động.</p>
-        </article>
-        <article class="value-card featured reveal" data-delay="80">
-          <span class="value-num">02</span>
-          <div class="value-icon">🚀</div>
-          <h3>Tò mò để trưởng thành</h3>
-          <p>Nội dung trực quan khuyến khích trẻ đặt câu hỏi, tìm hiểu và mạnh dạn khám phá những điều mới.</p>
-        </article>
-        <article class="value-card reveal" data-delay="160">
-          <span class="value-num">03</span>
-          <div class="value-icon">🤝</div>
-          <h3>Gắn kết cùng gia đình</h3>
-          <p>Mỗi cuốn sách có thể trở thành một cuộc trò chuyện đáng nhớ giữa trẻ, cha mẹ và bạn bè.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="family-banner section-pad">
-      <div class="family-photo reveal">
-        <img src="./assets/scene-family.jpg" alt="Mẹ và bé cùng đọc sách trong không gian gia đình ấm áp" loading="lazy" />
-      </div>
-      <div class="family-copy reveal" data-delay="100">
-        <p class="eyebrow"><span>✦</span> ĐỌC CÙNG CON, LỚN CÙNG CON</p>
-        <blockquote>“Một cuốn sách hay không chỉ kể một câu chuyện — nó mở ra một cuộc trò chuyện.”</blockquote>
-        <p>Cánh Giấy mong mỗi giờ đọc sách trở thành khoảng thời gian gia đình gần nhau hơn, hiểu nhau hơn và cùng nuôi dưỡng những ước mơ thật đẹp.</p>
-        <a class="text-link" href="#top">Bắt đầu hành trình cùng Cánh Giấy <span>→</span></a>
-      </div>
-    </section>
-
-    <section class="final-cta">
-      <div class="cta-sparkles" aria-hidden="true">✦ ★ ✦</div>
-      <img src="./assets/logo.png" alt="Cánh Giấy" class="cta-logo" />
-      <h2>Mỗi trang sách là một đôi cánh.</h2>
-      <p>Cùng Cánh Giấy để trí tưởng tượng của trẻ được bay xa.</p>
-      <a class="btn btn-primary btn-large" href="#film">▶ Xem video giới thiệu</a>
-      <svg class="paper-plane plane-final" viewBox="0 0 92 64" aria-hidden="true">
-        <path d="M5 28 86 4 55 59 40 39 23 50 26 34Z" fill="#21b8ef" stroke="#0b5a80" stroke-width="4" stroke-linejoin="round"/>
-        <path d="M26 34 86 4 40 39" fill="#e8f8ff" stroke="#0b5a80" stroke-width="4" stroke-linejoin="round"/>
-      </svg>
-    </section>
+    <section class="family section" aria-labelledby="family-title"><div class="family-copy reveal"><p class="eyebrow">04 — ĐỌC CÙNG CON, LỚN CÙNG CON</p><h2 id="family-title">Trang sách mở.<br><em>Khoảng cách gần lại.</em></h2><p>Đôi khi, điều đẹp nhất sau một câu chuyện là câu hỏi của con, nụ cười của mẹ, hay một cuộc trò chuyện chưa muốn kết thúc.</p><p>Cùng con chọn một thế giới yêu thích. Dành cho nhau một chút thời gian. Để mỗi giờ đọc sách trở thành một kỷ niệm.</p><a href="#worlds" class="text-link">Tìm thế giới con yêu <span aria-hidden="true">↗</span></a></div><figure class="family-visual reveal"><img src="./assets/family.webp" alt="Mẹ và con gái mỉm cười khi cùng khám phá sách ở nhà" width="1280" height="625" loading="lazy"><figcaption>Mỗi câu chuyện là một dịp để gần nhau hơn.</figcaption></figure></section>
+    <section class="closing" aria-labelledby="closing-title"><span class="closing-star" aria-hidden="true">✦</span><p class="eyebrow">HÀNH TRÌNH CHỈ VỪA BẮT ĐẦU</p><h2 id="closing-title">Một trang sách hôm nay.<br><em>Một ước mơ ngày mai.</em></h2><a class="button dark" href="#worlds">Cùng Cánh Giấy bay xa <span aria-hidden="true">↗</span></a></section>
   </main>
-
-  <footer class="site-footer">
-    <div class="footer-brand">
-      <img src="./assets/logo.png" alt="Cánh Giấy" />
-      <p>Sách dành cho thiếu niên nhi đồng</p>
-    </div>
-    <p class="footer-note">Đồ án website giới thiệu / quảng bá thương hiệu Cánh Giấy.</p>
-    <a href="#top">Lên đầu trang ↑</a>
-  </footer>
-
-  <script src="./script.js"></script>
+  <footer class="footer"><a class="footer-logo" href="#home"><img src="./assets/logo.png" alt="Cánh Giấy" width="1711" height="913" loading="lazy"></a><p>Sách dành cho thiếu niên nhi đồng.<br>Mở trang sách, chắp cánh ước mơ.</p><a href="#home" class="back-top">Về đầu trang <span aria-hidden="true">↑</span></a><div class="footer-bottom"><span>© 2026 Cánh Giấy · Đồ án giới thiệu thương hiệu</span><button id="motion-toggle" aria-pressed="false">Tạm dừng chuyển động <span aria-hidden="true">Ⅱ</span></button></div></footer>
+  <dialog id="world-dialog" aria-labelledby="dialog-title"><button class="dialog-close" aria-label="Đóng thế giới sách">×</button><img id="dialog-image" alt="" width="1280" height="625"><div class="dialog-content"><p id="dialog-label" class="eyebrow"></p><h2 id="dialog-title"></h2><p id="dialog-description"></p><div class="conversation"><span>CÙNG CON TRÒ CHUYỆN</span><p id="dialog-question"></p></div><button class="button gold" id="dialog-film">Bước vào thế giới qua phim <span aria-hidden="true">▶</span></button></div></dialog>
 </body>
 </html>
