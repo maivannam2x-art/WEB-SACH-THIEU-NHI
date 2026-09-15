@@ -107,3 +107,11 @@
 @media(max-width:1000px){.book-lab{grid-template-columns:1fr;padding-bottom:75px}.book-lab-copy{max-width:670px}.book-stage{width:min(840px,100%);margin:auto}.ribbon-runner{width:155px}.ribbon-readers{width:185px}}
 @media(max-width:600px){.word-ribbon{height:76px}.ribbon-runner{width:130px;bottom:-1px;opacity:.96}.ribbon-readers{width:142px;right:1%;bottom:-15px}.book-lab{padding-top:65px}.book-stage{padding:35px 0 25px;width:108%;margin-left:-4%}.book{aspect-ratio:1.42}.book-base,.page-face{padding:7%}.book-base span{font-size:.86rem}.book-base small,.page-art small,.book-cover small,.final-page small{font-size:7px}.book-cover{border-width:4px}.book-cover b{font-size:.88rem}.book-cover i{font-size:25px;margin:12px 0}.page-art strong{font-size:.96rem}.book-controls{justify-content:center}.book-lab-copy{text-align:center}.book-lab-copy>p:not(.eyebrow){margin-left:auto;margin-right:auto}}
 @media(prefers-reduced-motion:reduce){.ribbon-runner{display:none}.ribbon-readers{animation:none}.word-ribbon-track{animation:none!important}.book-leaf{transition:none}.story-image>img,.story-spark,.hero-visual:after,.hero-orbit{animation:none!important}}
+
+/* Let the readers sit on the top edge while the runners fit fully inside. */
+body{overflow-x:hidden}
+.word-ribbon{height:132px;overflow:visible}
+.ribbon-runner{width:190px;bottom:2px}
+.ribbon-readers{width:240px;right:5%;top:-97px;bottom:auto}
+@media(max-width:1000px){.ribbon-runner{width:175px}.ribbon-readers{width:215px;top:-87px}}
+@media(max-width:600px){.word-ribbon{height:110px}.ribbon-runner{width:155px;bottom:2px}.ribbon-readers{width:180px;right:1%;top:-72px;bottom:auto}}
