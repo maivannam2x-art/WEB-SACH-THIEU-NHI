@@ -101,7 +101,7 @@
   }
   document.querySelectorAll('[data-world]').forEach(button=>button.addEventListener('click',()=>{
     const key=button.dataset.world,data=worlds[key];previousFocus=button;restoreDialogFocus=keyboardNavigation;
-    document.querySelector('#dialog-image').src=`./assets/${key}-v2.webp`;
+    document.querySelector('#dialog-image').src=`./assets/${key}.gif`;
     document.querySelector('#dialog-image').alt=data.alt;
     document.querySelector('#dialog-label').textContent=data.label;
     document.querySelector('#dialog-title').textContent=data.title;
@@ -114,9 +114,10 @@
     dialog.show();
     requestAnimationFrame(()=>requestAnimationFrame(()=>dialog.classList.remove('is-opening')));
   }));
-  document.querySelector('.dialog-close').addEventListener('click',()=>closeWorldDialog());
   document.addEventListener('keydown', event=>{if(event.key==='Escape' && dialog.open) closeWorldDialog();});
-  dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)closeWorldDialog();}});
+  document.addEventListener('pointerdown', event=>{
+    if(dialog.open && !dialog.contains(event.target) && !event.target.closest('[data-world]')) closeWorldDialog();
+  }, true);
   dialog.addEventListener('close',()=>{
     clearTimeout(dialogCloseTimer);
     dialog.classList.remove('is-opening','is-closing');
@@ -125,7 +126,6 @@
     restoreDialogFocus=false;
     const callback=afterDialogClose;afterDialogClose=undefined;callback?.();
   });
-  document.querySelector('#dialog-film').addEventListener('click',()=>closeWorldDialog(playFilm));
 
   const leaves = [...document.querySelectorAll('.book-leaf')];
   const book = document.querySelector('#flip-book');

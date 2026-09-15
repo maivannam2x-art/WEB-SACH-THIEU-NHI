@@ -169,3 +169,8 @@ body.dialog-open{overflow:auto!important;padding-right:0!important}
 /* Keep the paper-plane pointer above the floating detail card. */
 .paper-cursor{z-index:10001}
 .cursor-trail{z-index:10000}
+
+/* Center the seated readers over the ribbon so they do not cover the hero
+   caption in the upper corner. */
+.ribbon-readers{left:50%;right:auto;transform:translateX(-50%)}
+@media(max-width:600px){.ribbon-readers{left:50%;right:auto;transform:translateX(-50%)}}
