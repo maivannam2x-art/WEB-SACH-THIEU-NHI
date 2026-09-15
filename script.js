@@ -98,8 +98,15 @@
   function renderBook() {
     leaves.forEach((leaf, index) => {
       const flipped = index < currentLeaf;
+      const visibleLeft = index === currentLeaf - 1;
+      const visibleRight = index === currentLeaf;
       leaf.classList.toggle('flipped', flipped);
+      leaf.classList.toggle('visible-left', visibleLeft);
+      leaf.classList.toggle('visible-right', visibleRight);
+      leaf.classList.toggle('page-hidden', !visibleLeft && !visibleRight);
       leaf.setAttribute('aria-pressed', String(flipped));
+      leaf.setAttribute('aria-hidden', String(!visibleLeft && !visibleRight));
+      leaf.tabIndex = visibleLeft || visibleRight ? 0 : -1;
       leaf.style.zIndex = String(flipped ? leaves.length + index + 3 : leaves.length - index + 3);
     });
     book.classList.toggle('book-open', currentLeaf > 0);

@@ -115,3 +115,11 @@ body{overflow-x:hidden}
 .ribbon-readers{width:240px;right:5%;top:-97px;bottom:auto}
 @media(max-width:1000px){.ribbon-runner{width:175px}.ribbon-readers{width:215px;top:-87px}}
 @media(max-width:600px){.word-ribbon{height:110px}.ribbon-runner{width:155px;bottom:2px}.ribbon-readers{width:180px;right:1%;top:-72px;bottom:auto}}
+
+/* Render only the active spread so hidden 3D pages cannot ghost or blur together. */
+.book-leaf.page-hidden{visibility:hidden;pointer-events:none}
+.book-leaf.visible-left,.book-leaf.visible-right{visibility:visible}
+.book-leaf,.page-face{backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.page-front{transform:rotateY(0deg) translateZ(1px)}
+.page-back{transform:rotateY(180deg) translateZ(1px)}
+.book-leaf.flipped:hover{transform:rotateY(-180deg) translateZ(-24px)}
