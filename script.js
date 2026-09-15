@@ -95,7 +95,9 @@
     afterDialogClose = callback;
     if (motionPaused) { dialog.close(); return; }
     dialog.classList.add('is-closing');
-    dialogCloseTimer = setTimeout(() => { if (dialog.open) dialog.close(); }, 280);
+    // This is modeless, so close immediately and return pointer control to the
+    // page instead of keeping a fading layer over the user's content.
+    dialog.close();
   }
   document.querySelectorAll('[data-world]').forEach(button=>button.addEventListener('click',()=>{
     const key=button.dataset.world,data=worlds[key];previousFocus=button;restoreDialogFocus=keyboardNavigation;
