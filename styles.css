@@ -166,7 +166,6 @@ body.dialog-open{overflow:auto!important;padding-right:0!important}
 #world-dialog[open]{position:fixed;z-index:100;inset:50% auto auto 50%;margin:0;transform:translate(-50%,-50%) scale(1)}
 #world-dialog::backdrop,#world-dialog[open]::backdrop{background:transparent!important;backdrop-filter:none!important}
 
-/* Always keep the browser pointer visible. The decorative paper pointer is
-   optional and must never replace the real cursor. */
-html.cursor-ready,html.cursor-ready *{cursor:auto!important}
-.paper-cursor,.cursor-trail{display:none!important}
+/* Keep the paper-plane pointer above the floating detail card. */
+.paper-cursor{z-index:10001}
+.cursor-trail{z-index:10000}
