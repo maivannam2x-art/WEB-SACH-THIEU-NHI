@@ -107,20 +107,17 @@
     document.querySelector('#dialog-question').textContent=data.question;
     dialog.classList.remove('is-closing');
     dialog.classList.add('is-opening');
-    dialog.showModal();
-    const scrollbarGap = window.innerWidth - document.documentElement.clientWidth;
-    document.body.style.setProperty('--scrollbar-gap', `${scrollbarGap}px`);
-    document.body.classList.add('dialog-open');
+    // Keep the main page live behind the detail card: the modeless dialog
+    // preserves scrolling, pointer movement, and the page context.
+    dialog.show();
     requestAnimationFrame(()=>requestAnimationFrame(()=>dialog.classList.remove('is-opening')));
   }));
   document.querySelector('.dialog-close').addEventListener('click',()=>closeWorldDialog());
-  dialog.addEventListener('cancel',event=>{event.preventDefault();closeWorldDialog();});
+  document.addEventListener('keydown', event=>{if(event.key==='Escape' && dialog.open) closeWorldDialog();});
   dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)closeWorldDialog();}});
   dialog.addEventListener('close',()=>{
     clearTimeout(dialogCloseTimer);
     dialog.classList.remove('is-opening','is-closing');
-    document.body.classList.remove('dialog-open');
-    document.body.style.removeProperty('--scrollbar-gap');
     if (restoreDialogFocus) previousFocus?.focus({preventScroll:true});
     else { previousFocus?.blur(); if (document.activeElement instanceof HTMLElement) document.activeElement.blur(); }
     restoreDialogFocus=false;
