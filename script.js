@@ -3,12 +3,10 @@
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   let motionPaused = reducedMotion.matches;
   const motionButton = document.querySelector('#motion-toggle');
-  const motionImage = document.querySelector('#dream-motion');
   function applyMotion() {
     document.documentElement.classList.toggle('motion-paused', motionPaused);
     motionButton.setAttribute('aria-pressed', String(motionPaused));
     motionButton.textContent = motionPaused ? 'Bật chuyển động ▷' : 'Tạm dừng chuyển động Ⅱ';
-    motionImage.src = motionPaused ? './assets/dream-still.webp' : './assets/paper-dream.webp';
   }
   applyMotion();
   motionButton.addEventListener('click', () => { motionPaused = !motionPaused; applyMotion(); });
@@ -31,6 +29,38 @@
   if(matchMedia('(hover: hover) and (pointer: fine)').matches) {
     hero.addEventListener('pointermove', e => {if(motionPaused)return;const r = hero.getBoundingClientRect();visual.style.setProperty('--ry', `${((e.clientX-r.left)/r.width-.5)*5}deg`);visual.style.setProperty('--rx', `${-((e.clientY-r.top)/r.height-.5)*4}deg`);});
     hero.addEventListener('pointerleave', () => {visual.style.setProperty('--rx','0deg');visual.style.setProperty('--ry','0deg');});
+
+    const cursor = document.querySelector('.paper-cursor');
+    const trail = document.querySelector('.cursor-trail');
+    let cursorX = innerWidth / 2, cursorY = innerHeight / 2, previousX = cursorX, angle = -18;
+    document.addEventListener('pointermove', event => {
+      const dx = event.clientX - previousX;
+      const dy = event.clientY - cursorY;
+      if (Math.abs(dx) + Math.abs(dy) > 2) angle = Math.atan2(dy, dx) * 180 / Math.PI;
+      previousX = cursorX; cursorX = event.clientX; cursorY = event.clientY;
+      cursor.style.setProperty('--cursor-x', `${cursorX}px`);
+      cursor.style.setProperty('--cursor-y', `${cursorY}px`);
+      cursor.style.setProperty('--cursor-angle', `${angle}deg`);
+      trail.style.setProperty('--trail-x', `${cursorX}px`);
+      trail.style.setProperty('--trail-y', `${cursorY}px`);
+      document.documentElement.classList.add('cursor-ready');
+    });
+    document.addEventListener('pointerover', event => cursor.classList.toggle('cursor-hover', Boolean(event.target.closest('a,button'))));
+
+    document.querySelectorAll('.world-card').forEach(card => {
+      card.addEventListener('pointermove', event => {
+        if (motionPaused) return;
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--card-rx', `${-((event.clientY - rect.top) / rect.height - .5) * 9}deg`);
+        card.style.setProperty('--card-ry', `${((event.clientX - rect.left) / rect.width - .5) * 11}deg`);
+        card.style.setProperty('--shine-x', `${((event.clientX - rect.left) / rect.width) * 100}%`);
+        card.style.setProperty('--shine-y', `${((event.clientY - rect.top) / rect.height) * 100}%`);
+      });
+      card.addEventListener('pointerleave', () => {
+        card.style.setProperty('--card-rx', '0deg');
+        card.style.setProperty('--card-ry', '0deg');
+      });
+    });
   }
   const video = document.querySelector('#brand-film');
   function playFilm() {document.querySelector('#film').scrollIntoView({behavior:motionPaused?'instant':'smooth'});video.currentTime=0;video.play().catch(()=>video.focus());}
@@ -45,7 +75,7 @@
   let previousFocus;
   document.querySelectorAll('[data-world]').forEach(button=>button.addEventListener('click',()=>{
     const key=button.dataset.world,data=worlds[key];previousFocus=button;
-    document.querySelector('#dialog-image').src=`./assets/${key}.webp`;
+    document.querySelector('#dialog-image').src=`./assets/${key}-v2.webp`;
     document.querySelector('#dialog-image').alt=data.alt;
     document.querySelector('#dialog-label').textContent=data.label;
     document.querySelector('#dialog-title').textContent=data.title;
@@ -57,4 +87,28 @@
   dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});
   dialog.addEventListener('close',()=>{document.body.style.overflow='';previousFocus?.focus({preventScroll:true});});
   document.querySelector('#dialog-film').addEventListener('click',()=>{dialog.close();playFilm();});
+
+  const leaves = [...document.querySelectorAll('.book-leaf')];
+  const book = document.querySelector('#flip-book');
+  const progress = document.querySelector('#book-progress');
+  let currentLeaf = 0;
+  const pageLabels = ['Bìa sách', 'Trang 1 · Cổ tích', 'Trang 2 · Vũ trụ', 'Trang 3 · Khu rừng'];
+  function renderBook() {
+    leaves.forEach((leaf, index) => {
+      const flipped = index < currentLeaf;
+      leaf.classList.toggle('flipped', flipped);
+      leaf.setAttribute('aria-pressed', String(flipped));
+      leaf.style.zIndex = String(flipped ? index + 1 : leaves.length - index + 2);
+    });
+    book.classList.toggle('book-open', currentLeaf > 0);
+    progress.textContent = pageLabels[currentLeaf];
+    document.querySelector('#book-prev').disabled = currentLeaf === 0;
+    document.querySelector('#book-next').disabled = currentLeaf === leaves.length;
+  }
+  function nextPage() { if (currentLeaf < leaves.length) { currentLeaf += 1; renderBook(); } }
+  function previousPage() { if (currentLeaf > 0) { currentLeaf -= 1; renderBook(); } }
+  document.querySelector('#book-next').addEventListener('click', nextPage);
+  document.querySelector('#book-prev').addEventListener('click', previousPage);
+  leaves.forEach((leaf, index) => leaf.addEventListener('click', () => index < currentLeaf ? previousPage() : nextPage()));
+  renderBook();
 })();
