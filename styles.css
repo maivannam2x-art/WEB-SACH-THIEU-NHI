@@ -123,3 +123,16 @@ body{overflow-x:hidden}
 .page-front{transform:rotateY(0deg) translateZ(1px)}
 .page-back{transform:rotateY(180deg) translateZ(1px)}
 .book-leaf.flipped:hover{transform:rotateY(-180deg) translateZ(-24px)}
+
+/* Smooth world-dialog transitions without leaving a mouse-focus frame behind. */
+body.dialog-open{overflow:hidden;padding-right:var(--scrollbar-gap,0)}
+.world-card:focus{outline:none}
+.keyboard-navigation .world-card:focus-visible{outline:3px solid var(--blue);outline-offset:6px}
+#world-dialog{opacity:0;transform:translateY(24px) scale(.965);transition:opacity .28s ease,transform .38s cubic-bezier(.2,.8,.2,1),display .28s allow-discrete,overlay .28s allow-discrete}
+#world-dialog[open]{opacity:1;transform:translateY(0) scale(1)}
+#world-dialog.is-opening,#world-dialog.is-closing{opacity:0;transform:translateY(18px) scale(.975)}
+#world-dialog::backdrop{background:#03152500;backdrop-filter:blur(0);transition:background .28s ease,backdrop-filter .28s ease,display .28s allow-discrete,overlay .28s allow-discrete}
+#world-dialog[open]::backdrop{background:#031525c9;backdrop-filter:blur(8px)}
+#world-dialog.is-opening::backdrop,#world-dialog.is-closing::backdrop{background:#03152500;backdrop-filter:blur(0)}
+@starting-style{#world-dialog[open]{opacity:0;transform:translateY(24px) scale(.965)}#world-dialog[open]::backdrop{background:#03152500;backdrop-filter:blur(0)}}
+@media(prefers-reduced-motion:reduce){#world-dialog,#world-dialog::backdrop{transition:none!important}}

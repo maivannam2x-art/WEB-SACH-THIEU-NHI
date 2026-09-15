@@ -2,6 +2,17 @@
   'use strict';
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   let motionPaused = reducedMotion.matches;
+  let keyboardNavigation = false;
+  document.addEventListener('keydown', event => {
+    if (['Tab', 'Enter', ' '].includes(event.key)) {
+      keyboardNavigation = true;
+      document.documentElement.classList.add('keyboard-navigation');
+    }
+  });
+  document.addEventListener('pointerdown', () => {
+    keyboardNavigation = false;
+    document.documentElement.classList.remove('keyboard-navigation');
+  }, true);
   const motionButton = document.querySelector('#motion-toggle');
   function applyMotion() {
     document.documentElement.classList.toggle('motion-paused', motionPaused);
@@ -75,20 +86,47 @@
   };
   const dialog = document.querySelector('#world-dialog');
   let previousFocus;
+  let restoreDialogFocus = false;
+  let dialogCloseTimer;
+  let afterDialogClose;
+  function closeWorldDialog(callback) {
+    if (!dialog.open) { callback?.(); return; }
+    clearTimeout(dialogCloseTimer);
+    afterDialogClose = callback;
+    if (motionPaused) { dialog.close(); return; }
+    dialog.classList.add('is-closing');
+    dialogCloseTimer = setTimeout(() => { if (dialog.open) dialog.close(); }, 280);
+  }
   document.querySelectorAll('[data-world]').forEach(button=>button.addEventListener('click',()=>{
-    const key=button.dataset.world,data=worlds[key];previousFocus=button;
+    const key=button.dataset.world,data=worlds[key];previousFocus=button;restoreDialogFocus=keyboardNavigation;
     document.querySelector('#dialog-image').src=`./assets/${key}-v2.webp`;
     document.querySelector('#dialog-image').alt=data.alt;
     document.querySelector('#dialog-label').textContent=data.label;
     document.querySelector('#dialog-title').textContent=data.title;
     document.querySelector('#dialog-description').textContent=data.description;
     document.querySelector('#dialog-question').textContent=data.question;
-    dialog.showModal();document.body.style.overflow='hidden';
+    dialog.classList.remove('is-closing');
+    dialog.classList.add('is-opening');
+    dialog.showModal();
+    const scrollbarGap = window.innerWidth - document.documentElement.clientWidth;
+    document.body.style.setProperty('--scrollbar-gap', `${scrollbarGap}px`);
+    document.body.classList.add('dialog-open');
+    requestAnimationFrame(()=>requestAnimationFrame(()=>dialog.classList.remove('is-opening')));
   }));
-  document.querySelector('.dialog-close').addEventListener('click',()=>dialog.close());
-  dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});
-  dialog.addEventListener('close',()=>{document.body.style.overflow='';previousFocus?.focus({preventScroll:true});});
-  document.querySelector('#dialog-film').addEventListener('click',()=>{dialog.close();playFilm();});
+  document.querySelector('.dialog-close').addEventListener('click',()=>closeWorldDialog());
+  dialog.addEventListener('cancel',event=>{event.preventDefault();closeWorldDialog();});
+  dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)closeWorldDialog();}});
+  dialog.addEventListener('close',()=>{
+    clearTimeout(dialogCloseTimer);
+    dialog.classList.remove('is-opening','is-closing');
+    document.body.classList.remove('dialog-open');
+    document.body.style.removeProperty('--scrollbar-gap');
+    if (restoreDialogFocus) previousFocus?.focus({preventScroll:true});
+    else { previousFocus?.blur(); if (document.activeElement instanceof HTMLElement) document.activeElement.blur(); }
+    restoreDialogFocus=false;
+    const callback=afterDialogClose;afterDialogClose=undefined;callback?.();
+  });
+  document.querySelector('#dialog-film').addEventListener('click',()=>closeWorldDialog(playFilm));
 
   const leaves = [...document.querySelectorAll('.book-leaf')];
   const book = document.querySelector('#flip-book');
