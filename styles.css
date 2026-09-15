@@ -78,7 +78,7 @@
 .book-left{left:0;border-radius:12px 2px 2px 12px;transform:rotateY(2deg) translateZ(-18px);transform-origin:right}.book-right{left:50%;border-radius:2px 12px 12px 2px;transform:rotateY(-2deg) translateZ(-18px);transform-origin:left}
 .book-leaf{left:50%;height:98%;top:1%;background:none;transform-origin:left center;transform-style:preserve-3d;transition:transform 1s cubic-bezier(.22,.74,.16,1),filter .5s;will-change:transform;cursor:pointer}
 .book-leaf{transform:translateZ(24px)}
-.book-leaf.leaf-one{z-index:6}.book-leaf.leaf-two{z-index:5}.book-leaf.leaf-three{z-index:4}
+.book-leaf.leaf-one{z-index:7}.book-leaf.leaf-two{z-index:6}.book-leaf.leaf-three{z-index:5}.book-leaf.leaf-four{z-index:4}
 .book-leaf:focus-visible{outline:3px solid var(--gold);outline-offset:5px}
 .book-leaf.flipped{transform:rotateY(-180deg) translateZ(-24px)}
 .book-leaf:not(.flipped):hover{transform:rotateY(-9deg)}
@@ -94,6 +94,25 @@
 .fairytale-page{background-image:url('./assets/fairytale-v2.webp')}.space-page{background-image:url('./assets/space-v2.webp')}.forest-page{background-image:url('./assets/forest-v2.webp')}.friends-page{background-image:url('./assets/friends-v2.webp')}
 .final-page{background:radial-gradient(circle at 50% 35%,#fbd468,#e8aa31 42%,#ca791e);color:var(--ink);justify-content:center;align-items:center;text-align:center}.final-page i{font-size:45px;font-style:normal}.final-page strong{font-family:var(--serif);font-size:clamp(1.2rem,2.2vw,2.2rem);line-height:1.25;margin:15px 0}.final-page small{letter-spacing:.1em;font-weight:900}
 
+/* Original story pages: Mây and the living paper plane Cánh Giấy. */
+.story-scene-one{background-image:url('./assets/story-may-awakening-v1.webp')}.story-scene-two{background-image:url('./assets/story-sleeping-city-v1.webp')}.story-scene-three{background-image:url('./assets/story-reading-courage-v1.webp')}.story-scene-four{background-image:url('./assets/story-shared-wings-v1.webp')}
+.page-art[class*="story-scene-"]{background-size:108%;animation:story-scene-drift 8s ease-in-out infinite alternate}
+.page-art[class*="story-scene-"]:after{background:radial-gradient(circle at 74% 22%,#ffe39b8a,transparent 18%),linear-gradient(90deg,#0002,transparent 18%,transparent 82%,#fff3);animation:story-scene-glow 3.4s ease-in-out infinite}
+.story-text-page{justify-content:center;gap:clamp(9px,1.4vw,18px);background:radial-gradient(circle at 85% 12%,#fbc44938,transparent 19%),linear-gradient(135deg,#fffdf5,#f5e6c6);padding:10%}
+.story-text-page:before{content:"";position:absolute;inset:7%;border:1px solid #b8894542;border-radius:50% 8px 50% 8px;pointer-events:none}
+.page-chapter{position:relative;z-index:2;font-size:clamp(7px,.8vw,11px);font-weight:900;letter-spacing:.15em;color:var(--blue)}
+.story-text-page blockquote{position:relative;z-index:2;margin:0;font-family:var(--serif);font-weight:600;font-size:clamp(.82rem,1.42vw,1.35rem);line-height:1.42;color:#17354a}
+.story-text-page blockquote:before{content:"“";position:absolute;left:-.48em;top:-.38em;font-size:3.2em;line-height:1;color:#e9b32e80}
+.story-text-page blockquote em{display:inline-block;margin-top:5px;color:#a25727;font-weight:500}
+.story-text-page p{position:relative;z-index:2;color:#4d5d63;font-size:clamp(.62rem,.9vw,.86rem);line-height:1.65}
+.page-magic{position:relative;z-index:2;align-self:flex-end;color:#d59613;font-size:clamp(.78rem,1.2vw,1.15rem);letter-spacing:.08em;animation:page-magic-flight 3.2s ease-in-out infinite}
+.story-epilogue{justify-content:center;align-items:center;text-align:center;background:radial-gradient(circle at 50% 38%,#ffe58d,#efb73e 46%,#c8741d);padding:11%}
+.story-epilogue i{font-size:clamp(1.6rem,3vw,3rem);font-style:normal;animation:epilogue-star 2.2s ease-in-out infinite}.story-epilogue span{font-weight:600}.story-epilogue b{margin-top:12px;font-size:11px;letter-spacing:.14em}.story-epilogue small{margin-top:22px}
+@keyframes story-scene-drift{from{background-position:48% 50%}to{background-position:53% 47%}}
+@keyframes story-scene-glow{50%{opacity:.45}}
+@keyframes page-magic-flight{50%{transform:translate(-12px,-7px);filter:drop-shadow(0 0 6px #fbc449)}}
+@keyframes epilogue-star{50%{transform:rotate(25deg) scale(1.16);filter:drop-shadow(0 0 12px #fff4b5)}}
+
 /* Paper-plane pointer for precise mouse devices only. */
 .paper-cursor,.cursor-trail{display:none}
 @media(hover:hover) and (pointer:fine){
@@ -105,8 +124,8 @@
 }
 
 @media(max-width:1000px){.book-lab{grid-template-columns:1fr;padding-bottom:75px}.book-lab-copy{max-width:670px}.book-stage{width:min(840px,100%);margin:auto}.ribbon-runner{width:155px}.ribbon-readers{width:185px}}
-@media(max-width:600px){.word-ribbon{height:76px}.ribbon-runner{width:130px;bottom:-1px;opacity:.96}.ribbon-readers{width:142px;right:1%;bottom:-15px}.book-lab{padding-top:65px}.book-stage{padding:35px 0 25px;width:108%;margin-left:-4%}.book{aspect-ratio:1.42}.book-base,.page-face{padding:7%}.book-base span{font-size:.86rem}.book-base small,.page-art small,.book-cover small,.final-page small{font-size:7px}.book-cover{border-width:4px}.book-cover b{font-size:.88rem}.book-cover i{font-size:25px;margin:12px 0}.page-art strong{font-size:.96rem}.book-controls{justify-content:center}.book-lab-copy{text-align:center}.book-lab-copy>p:not(.eyebrow){margin-left:auto;margin-right:auto}}
-@media(prefers-reduced-motion:reduce){.ribbon-runner{display:none}.ribbon-readers{animation:none}.word-ribbon-track{animation:none!important}.book-leaf{transition:none}.story-image>img,.story-spark,.hero-visual:after,.hero-orbit{animation:none!important}}
+@media(max-width:600px){.word-ribbon{height:76px}.ribbon-runner{width:130px;bottom:-1px;opacity:.96}.ribbon-readers{width:142px;right:1%;bottom:-15px}.book-lab{padding-top:65px}.book-stage{padding:35px 0 25px;width:108%;margin-left:-4%}.book{aspect-ratio:1.42}.book-base,.page-face{padding:7%}.book-base span{font-size:.86rem}.book-base small,.page-art small,.book-cover small,.final-page small{font-size:7px}.book-cover{border-width:4px}.book-cover b{font-size:.88rem}.book-cover i{font-size:25px;margin:12px 0}.page-art strong{font-size:.96rem}.story-text-page{gap:6px;padding:8%}.story-text-page blockquote{font-size:.7rem;line-height:1.3}.story-text-page p{font-size:.5rem;line-height:1.45}.page-chapter{font-size:6px}.page-magic{font-size:.68rem}.story-epilogue b{font-size:7px}.book-controls{justify-content:center}.book-lab-copy{text-align:center}.book-lab-copy>p:not(.eyebrow){margin-left:auto;margin-right:auto}}
+@media(prefers-reduced-motion:reduce){.ribbon-runner{display:none}.ribbon-readers{animation:none}.word-ribbon-track{animation:none!important}.book-leaf{transition:none}.story-image>img,.story-spark,.hero-visual:after,.hero-orbit,.page-art[class*="story-scene-"],.page-art[class*="story-scene-"]:after,.page-magic,.story-epilogue i{animation:none!important}}
 
 /* Let the readers sit on the top edge while the runners fit fully inside. */
 body{overflow-x:hidden}

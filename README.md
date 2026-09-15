@@ -6,7 +6,8 @@ Website giới thiệu thương hiệu sách dành cho thiếu niên nhi đồng
 
 - Logo chữ do người dùng cung cấp, giữ nguyên màu sắc và nét chữ.
 - Toàn bộ hình minh họa hero, bốn thế giới và cảnh gia đình được tạo riêng theo phong cách mô hình giấy 3D; không trích khung hình từ video.
-- Banner chữ chạy liên tục có nhóm bạn nhỏ chuyển động; card phản hồi theo chuột, con trỏ máy bay giấy và demo sách lật trang 3D.
+- Banner chữ chạy liên tục có nhóm bạn nhỏ chuyển động; card phản hồi theo chuột, con trỏ máy bay giấy và truyện ngắn tương tác lật trang 3D.
+- Truyện nguyên bản “Mây và Thành phố Những Trang Sách Ngủ Quên” gồm bốn chương minh họa, lời thoại và hoạt ảnh riêng; không lặp lại nội dung bốn tủ sách phía trên.
 - Video MP4 gốc dài 30 giây, giữ nguyên âm thanh và phụ đề trong hình.
 - Bốn thế giới tương tác: cổ tích, khoa học, thiên nhiên và tình bạn.
 - Responsive, menu điện thoại, điều khiển bàn phím, chế độ giảm chuyển động và nút tạm dừng ảnh động.
@@ -34,6 +35,7 @@ Website: https://canh-giay.vercel.app
 - `assets/canh-giay-30s.mp4`: video gốc do người dùng cung cấp, giữ nguyên nội dung.
 - `assets/storybook-hero.webp`: minh họa tạo riêng cho dự án bằng công cụ tạo ảnh.
 - Các ảnh `*-v2.webp`, `banner-runners-v3.webp` và `banner-readers-v5.webp`: minh họa gốc được tạo riêng, tối ưu cho web. Banner gồm nhóm chạy có nhịp chuyển động và hai bạn ngồi đọc sách.
+- Các ảnh `story-*-v1.webp`: bốn cảnh nguyên bản của truyện Mây và Cánh Giấy, được tạo đồng bộ nhân vật và tối ưu cho từng trang sách.
 - Video vẫn được lưu tại `assets/canh-giay-30s.mp4` và được Vercel phục vụ trực tiếp cùng frontend; dự án không sử dụng Cloudinary.
 
 Đây là đồ án giới thiệu thương hiệu, không phải cửa hàng giao dịch. Tên và logo được dùng theo tư liệu người dùng cung cấp; chưa thực hiện kiểm tra đăng ký nhãn hiệu.

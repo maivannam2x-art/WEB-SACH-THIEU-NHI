@@ -132,7 +132,7 @@
   const book = document.querySelector('#flip-book');
   const progress = document.querySelector('#book-progress');
   let currentLeaf = 0;
-  const pageLabels = ['Bìa sách', 'Chuyến 1 · Cổ tích & Vũ trụ', 'Chuyến 2 · Thiên nhiên & Tình bạn', 'Trang cuối · Bay tiếp'];
+  const pageLabels = ['Bìa sách', 'Chương 1 · Lời gọi', 'Chương 2 · Thành phố ngủ quên', 'Chương 3 · Dũng cảm', 'Trang kết · Sẻ chia'];
   function renderBook() {
     leaves.forEach((leaf, index) => {
       const flipped = index < currentLeaf;
