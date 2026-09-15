@@ -10,7 +10,9 @@
   }
   applyMotion();
   motionButton.addEventListener('click', () => { motionPaused = !motionPaused; applyMotion(); });
-  reducedMotion.addEventListener('change', event => {motionPaused = event.matches; applyMotion();});
+  const onMotionPreferenceChange = event => {motionPaused = event.matches; applyMotion();};
+  if (typeof reducedMotion.addEventListener === 'function') reducedMotion.addEventListener('change', onMotionPreferenceChange);
+  else if (typeof reducedMotion.addListener === 'function') reducedMotion.addListener(onMotionPreferenceChange);
   const menuButton = document.querySelector('.menu-toggle');
   const nav = document.querySelector('.nav');
   function closeMenu() { nav.classList.remove('open'); menuButton.setAttribute('aria-expanded', 'false'); menuButton.setAttribute('aria-label', 'Mở menu'); }
@@ -66,10 +68,10 @@
   function playFilm() {document.querySelector('#film').scrollIntoView({behavior:motionPaused?'instant':'smooth'});video.currentTime=0;video.play().catch(()=>video.focus());}
   document.querySelectorAll('[data-play]').forEach(button=>button.addEventListener('click',playFilm));
   const worlds = {
-    fairytale: {label:'TRÍ TƯỞNG TƯỢNG',title:'Xứ sở cổ tích',description:'Một lâu đài hiện lên từ trang sách, một người bạn lạ xuất hiện bên đường. Ở xứ sở cổ tích, lòng tốt và lòng dũng cảm có thể mở những cánh cửa mà phép màu chưa chắc mở được.',question:'Nếu bước vào một câu chuyện cổ tích, con muốn mang theo điều gì — và vì sao?',alt:'Lâu đài trong thế giới cổ tích Cánh Giấy'},
-    space: {label:'KHOA HỌC & KHÁM PHÁ',title:'Chạm những vì sao',description:'Đội chiếc mũ phi hành gia tưởng tượng và nhìn Trái Đất từ thật xa. Những trang sách về khoa học bắt đầu bằng một câu hỏi nhỏ, rồi dẫn ta đến những điều lớn lao.',question:'Nếu được gửi một lời nhắn từ Trái Đất đến một hành tinh xa, con sẽ kể điều gì?',alt:'Hai bạn nhỏ khám phá không gian bên Trái Đất'},
-    forest: {label:'THIÊN NHIÊN & PHIÊU LƯU',title:'Khu rừng bí mật',description:'Lắng nghe tiếng lá, quan sát một dấu chân, gặp một người bạn mới. Chuyến phiêu lưu trong khu rừng nhắc chúng ta rằng thiên nhiên luôn có điều thú vị dành cho những ai biết để ý.',question:'Con sẽ làm gì để chuyến khám phá của mình không làm phiền những người bạn trong rừng?',alt:'Các bạn nhỏ cùng người bạn xanh trong khu rừng'},
-    friends: {label:'TÌNH BẠN & KỸ NĂNG',title:'Cùng nhau lớn lên',description:'Có câu chuyện khiến ta bật cười, có câu chuyện giúp ta hiểu cảm xúc của một người bạn. Đọc cùng nhau là học cách lắng nghe, sẻ chia và nhìn thế giới từ nhiều góc nhìn.',question:'Con có câu chuyện nào muốn kể cho một người bạn hôm nay không?',alt:'Nhóm bạn nhỏ cùng nhau đọc sách'}
+    fairytale: {label:'TỦ SÁCH TRÍ TƯỞNG TƯỢNG',title:'Xứ sở cổ tích',description:'Mở một cuốn sách Cánh Giấy, lâu đài hiện lên và người bạn lạ xuất hiện bên đường. Ở xứ sở cổ tích, lòng tốt và lòng dũng cảm có thể mở những cánh cửa mà phép màu chưa chắc mở được.',question:'Nếu bước vào một câu chuyện cổ tích, con muốn mang theo điều gì — và vì sao?',alt:'Lâu đài trong thế giới cổ tích Cánh Giấy'},
+    space: {label:'TỦ SÁCH KHOA HỌC',title:'Chạm những vì sao',description:'Mở sách, đội chiếc mũ phi hành gia tưởng tượng và nhìn Trái Đất từ thật xa. Với Cánh Giấy, một câu hỏi nhỏ có thể trở thành đường bay đến những khám phá lớn lao.',question:'Nếu được gửi một lời nhắn từ Trái Đất đến một hành tinh xa, con sẽ kể điều gì?',alt:'Hai bạn nhỏ khám phá không gian bên Trái Đất'},
+    forest: {label:'TỦ SÁCH THIÊN NHIÊN',title:'Khu rừng bí mật',description:'Lật từng trang, lắng nghe tiếng lá, quan sát một dấu chân và gặp một người bạn mới. Cánh Giấy nhắc em rằng thiên nhiên luôn có điều thú vị dành cho những người đọc biết để ý.',question:'Con sẽ làm gì để chuyến khám phá của mình không làm phiền những người bạn trong rừng?',alt:'Các bạn nhỏ cùng người bạn xanh trong khu rừng'},
+    friends: {label:'TỦ SÁCH TÌNH BẠN',title:'Cùng nhau lớn lên',description:'Có cuốn sách khiến ta bật cười, có cuốn giúp ta hiểu cảm xúc của một người bạn. Đọc Cánh Giấy cùng nhau là học cách lắng nghe, sẻ chia và nhìn thế giới từ nhiều góc nhìn.',question:'Con có câu chuyện nào muốn kể cho một người bạn hôm nay không?',alt:'Nhóm bạn nhỏ cùng nhau đọc sách'}
   };
   const dialog = document.querySelector('#world-dialog');
   let previousFocus;
@@ -92,13 +94,13 @@
   const book = document.querySelector('#flip-book');
   const progress = document.querySelector('#book-progress');
   let currentLeaf = 0;
-  const pageLabels = ['Bìa sách', 'Trang 1 · Cổ tích', 'Trang 2 · Vũ trụ', 'Trang 3 · Khu rừng'];
+  const pageLabels = ['Bìa sách', 'Chuyến 1 · Cổ tích & Vũ trụ', 'Chuyến 2 · Thiên nhiên & Tình bạn', 'Trang cuối · Bay tiếp'];
   function renderBook() {
     leaves.forEach((leaf, index) => {
       const flipped = index < currentLeaf;
       leaf.classList.toggle('flipped', flipped);
       leaf.setAttribute('aria-pressed', String(flipped));
-      leaf.style.zIndex = String(flipped ? index + 1 : leaves.length - index + 2);
+      leaf.style.zIndex = String(flipped ? leaves.length + index + 3 : leaves.length - index + 3);
     });
     book.classList.toggle('book-open', currentLeaf > 0);
     progress.textContent = pageLabels[currentLeaf];

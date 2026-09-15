@@ -33,7 +33,7 @@ Website: https://canh-giay.vercel.app
 - `assets/logo.png`: logo Cánh Giấy do người dùng cung cấp.
 - `assets/canh-giay-30s.mp4`: video gốc do người dùng cung cấp, giữ nguyên nội dung.
 - `assets/storybook-hero.webp`: minh họa tạo riêng cho dự án bằng công cụ tạo ảnh.
-- Các ảnh `*-v2.webp` và `banner-kids-v2.png`: minh họa gốc được tạo riêng, tối ưu cho web.
+- Các ảnh `*-v2.webp`, `banner-runners-v3.webp` và `banner-readers-v5.webp`: minh họa gốc được tạo riêng, tối ưu cho web. Banner gồm nhóm chạy có nhịp chuyển động và hai bạn ngồi đọc sách.
 - Video vẫn được lưu tại `assets/canh-giay-30s.mp4` và được Vercel phục vụ trực tiếp cùng frontend; dự án không sử dụng Cloudinary.
 
 Đây là đồ án giới thiệu thương hiệu, không phải cửa hàng giao dịch. Tên và logo được dùng theo tư liệu người dùng cung cấp; chưa thực hiện kiểm tra đăng ký nhãn hiệu.
