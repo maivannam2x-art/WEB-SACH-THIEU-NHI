@@ -85,11 +85,6 @@
     friends: {label:'TỦ SÁCH TÌNH BẠN',title:'Cùng nhau lớn lên',description:'Có cuốn sách khiến ta bật cười, có cuốn giúp ta hiểu cảm xúc của một người bạn. Đọc Cánh Giấy cùng nhau là học cách lắng nghe, sẻ chia và nhìn thế giới từ nhiều góc nhìn.',question:'Con có câu chuyện nào muốn kể cho một người bạn hôm nay không?',alt:'Nhóm bạn nhỏ cùng nhau đọc sách'}
   };
   const dialog = document.querySelector('#world-dialog');
-  const cloudinaryWorldUrl = key => `https://res.cloudinary.com/dh8xlfsvq/image/upload/f_auto,q_auto/canh-giay/${key}.gif`;
-  document.querySelectorAll('[data-world]').forEach(card => {
-    const image = card.querySelector('img');
-    if (image) image.src = cloudinaryWorldUrl(card.dataset.world);
-  });
   let previousFocus;
   let restoreDialogFocus = false;
   let dialogCloseTimer;
@@ -106,7 +101,7 @@
   }
   document.querySelectorAll('[data-world]').forEach(button=>button.addEventListener('click',()=>{
     const key=button.dataset.world,data=worlds[key];previousFocus=button;restoreDialogFocus=keyboardNavigation;
-    document.querySelector('#dialog-image').src=cloudinaryWorldUrl(key);
+    document.querySelector('#dialog-image').src=`./assets/${key}.gif`;
     document.querySelector('#dialog-image').alt=data.alt;
     document.querySelector('#dialog-label').textContent=data.label;
     document.querySelector('#dialog-title').textContent=data.title;
