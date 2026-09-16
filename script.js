@@ -31,12 +31,12 @@
   nav.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
   document.addEventListener('keydown', e => {if(e.key === 'Escape') closeMenu();});
   const anchorHeadings = {
-    '#worlds': '#worlds-title',
-    '#book-demo': '#book-demo-title',
-    '#film': '#film-title'
+    '#worlds': '#worlds-title'
   };
   const centeredAnchors = {
-    '#story': '#story'
+    '#story': '#story',
+    '#book-demo': '#book-demo',
+    '#film': '#film'
   };
   function layoutTop(element) {
     let top = 0;
@@ -49,8 +49,10 @@
     const target = centeredTarget || document.querySelector(anchorHeadings[hash] || hash);
     if (!target) return;
     const offset = innerWidth <= 600 ? 24 : 48;
+    const viewportHeight = document.documentElement.clientHeight;
+    const fitsViewport = centeredTarget && centeredTarget.offsetHeight <= viewportHeight - offset * 2;
     const centeredTop = centeredTarget
-      ? layoutTop(centeredTarget) - (document.documentElement.clientHeight - centeredTarget.offsetHeight) / 2
+      ? layoutTop(centeredTarget) - (fitsViewport ? (viewportHeight - centeredTarget.offsetHeight) / 2 : offset)
       : layoutTop(target) - offset;
     const top = hash === '#home' ? 0 : Math.max(0, centeredTop);
     window.scrollTo({top, behavior: motionPaused ? 'auto' : 'smooth'});
