@@ -32,9 +32,11 @@
   document.addEventListener('keydown', e => {if(e.key === 'Escape') closeMenu();});
   const anchorHeadings = {
     '#worlds': '#worlds-title',
-    '#story': '#story-title',
     '#book-demo': '#book-demo-title',
     '#film': '#film-title'
+  };
+  const centeredAnchors = {
+    '#story': '#story'
   };
   function layoutTop(element) {
     let top = 0;
@@ -42,10 +44,15 @@
     return top;
   }
   function scrollToPageAnchor(hash, updateHistory = true) {
-    const target = document.querySelector(anchorHeadings[hash] || hash);
+    const centeredSelector = centeredAnchors[hash];
+    const centeredTarget = centeredSelector ? document.querySelector(centeredSelector) : null;
+    const target = centeredTarget || document.querySelector(anchorHeadings[hash] || hash);
     if (!target) return;
     const offset = innerWidth <= 600 ? 24 : 48;
-    const top = hash === '#home' ? 0 : Math.max(0, layoutTop(target) - offset);
+    const centeredTop = centeredTarget
+      ? layoutTop(centeredTarget) - (document.documentElement.clientHeight - centeredTarget.offsetHeight) / 2
+      : layoutTop(target) - offset;
+    const top = hash === '#home' ? 0 : Math.max(0, centeredTop);
     window.scrollTo({top, behavior: motionPaused ? 'auto' : 'smooth'});
     if (updateHistory && location.hash !== hash) history.pushState(null, '', hash);
   }
