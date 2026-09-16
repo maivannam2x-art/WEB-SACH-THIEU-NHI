@@ -30,6 +30,33 @@
   menuButton.addEventListener('click', () => {const open = nav.classList.toggle('open');menuButton.setAttribute('aria-expanded', String(open));menuButton.setAttribute('aria-label', open ? 'Đóng menu' : 'Mở menu');});
   nav.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
   document.addEventListener('keydown', e => {if(e.key === 'Escape') closeMenu();});
+  const anchorHeadings = {
+    '#worlds': '#worlds-title',
+    '#story': '#story-title',
+    '#book-demo': '#book-demo-title',
+    '#film': '#film-title'
+  };
+  function layoutTop(element) {
+    let top = 0;
+    for (let node = element; node; node = node.offsetParent) top += node.offsetTop;
+    return top;
+  }
+  function scrollToPageAnchor(hash, updateHistory = true) {
+    const target = document.querySelector(anchorHeadings[hash] || hash);
+    if (!target) return;
+    const offset = innerWidth <= 600 ? 24 : 48;
+    const top = hash === '#home' ? 0 : Math.max(0, layoutTop(target) - offset);
+    window.scrollTo({top, behavior: motionPaused ? 'auto' : 'smooth'});
+    if (updateHistory && location.hash !== hash) history.pushState(null, '', hash);
+  }
+  document.querySelectorAll('a[href^="#"]:not(.skip-link)').forEach(link => link.addEventListener('click', event => {
+    const hash = link.getAttribute('href');
+    if (!hash || hash === '#') return;
+    event.preventDefault();
+    scrollToPageAnchor(hash);
+  }));
+  window.addEventListener('popstate', () => {if (location.hash) scrollToPageAnchor(location.hash, false);});
+  window.addEventListener('load', () => {if (location.hash && location.hash !== '#main') scrollToPageAnchor(location.hash, false);}, {once:true});
   if ('IntersectionObserver' in window && !reducedMotion.matches) {
     const observer = new IntersectionObserver(entries => {entries.forEach(entry => {if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target);}});}, {threshold:0.07});
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
@@ -76,7 +103,7 @@
     });
   }
   const video = document.querySelector('#brand-film');
-  function playFilm() {document.querySelector('#film').scrollIntoView({behavior:motionPaused?'instant':'smooth'});video.currentTime=0;video.play().catch(()=>video.focus());}
+  function playFilm() {scrollToPageAnchor('#film');video.currentTime=0;video.play().catch(()=>video.focus());}
   document.querySelectorAll('[data-play]').forEach(button=>button.addEventListener('click',playFilm));
   const worlds = {
     fairytale: {label:'TỦ SÁCH TRÍ TƯỞNG TƯỢNG',title:'Xứ sở cổ tích',description:'Mở một cuốn sách Cánh Giấy, lâu đài hiện lên và người bạn lạ xuất hiện bên đường. Ở xứ sở cổ tích, lòng tốt và lòng dũng cảm có thể mở những cánh cửa mà phép màu chưa chắc mở được.',question:'Nếu bước vào một câu chuyện cổ tích, con muốn mang theo điều gì — và vì sao?',alt:'Lâu đài trong thế giới cổ tích Cánh Giấy'},
