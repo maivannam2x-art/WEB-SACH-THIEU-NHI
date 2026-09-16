@@ -156,5 +156,13 @@
   document.querySelector('#book-next').addEventListener('click', nextPage);
   document.querySelector('#book-prev').addEventListener('click', previousPage);
   leaves.forEach((leaf, index) => leaf.addEventListener('click', () => index < currentLeaf ? previousPage() : nextPage()));
+  book.addEventListener('click', event => {
+    // Rotated 3D pages can be visible while their hit area falls through to the
+    // book container. Use the clicked half as a reliable pointer/touch fallback.
+    if (event.target.closest('.book-leaf')) return;
+    const bounds = book.getBoundingClientRect();
+    if (event.clientX < bounds.left + bounds.width / 2) previousPage();
+    else nextPage();
+  });
   renderBook();
 })();
