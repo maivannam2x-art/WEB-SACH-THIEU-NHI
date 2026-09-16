@@ -63,7 +63,7 @@
     document.documentElement.classList.add('js-motion');
   }
   const stars = document.querySelector('.hero-stars');
-  for(let i = 0; i < 23; i++) {const s = document.createElement('i');s.style.left = `${(i*37+9)%98}%`;s.style.top = `${(i*19+4)%93}%`;s.style.setProperty('--duration', `${3+i%5}s`);s.style.setProperty('--delay', `${-i*.7}s`);stars.appendChild(s);}
+  for(let i = 0; i < 23; i++) {const s = document.createElement('i');if(i % 4 === 0)s.classList.add('five-point');s.style.left = `${(i*37+9)%98}%`;s.style.top = `${(i*19+4)%93}%`;s.style.setProperty('--duration', `${3+i%5}s`);s.style.setProperty('--delay', `${-i*.7}s`);stars.appendChild(s);}
   const hero = document.querySelector('.hero');
   const visual = document.querySelector('.hero-visual');
   if(matchMedia('(hover: hover) and (pointer: fine)').matches) {
